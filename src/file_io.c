@@ -11,18 +11,25 @@ int image_read(image_t *img, FILE *fin) {
     int width,height;
     int i = fscanf(fin,"P3 %d %d 255",&width,&height);
     if(i!=2)
+    {
     return -1;
-    if(width<0 && height<0)
-    return -1;
+    }
 
-    pixel_t *pixelarr = malloc(width*height*12);
+    if(width<0 && height<0)
+    {
+        return -1;
+    }
+
+    pixel_t *pixelarr = malloc(width*height*sizeof(pixel_t));
     if(pixelarr== NULL)
+    {
     return -1;
+    }
 
     for(int q= 0;q<(width*height);q++)
     {
         int red,green,blue;
-        int n = fscanf("%d %d %d",&red,&green,&blue);
+        int n = fscanf(fin,"%d %d %d",&red,&green,&blue);
         if((n!=3)||(red<0 || red>255)||(green<0 || green>255)||(blue<0 || blue>255)){
         free (pixelarr);
         return -1;
@@ -42,7 +49,7 @@ void image_write(const image_t *img, FILE *fout) {
    for(int i =0; i< img->w * img->h; i++){
     fprintf(fout,"%d %d %d ", img->img[i].r, img->img[i].g, img->img[i].b);
     }
-    fclose(fout);
+    
 }
 void image_free(image_t *img) {
     if (img->img != NULL) {
