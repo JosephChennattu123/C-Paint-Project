@@ -15,9 +15,9 @@ void rotate_counterclockwise(image_t *img) {
     {
         for(int j=0;j<nc;j++)
         {
-            mir_whore[(nr*i)+j].r=img->img[(row*(j))+(column-i-1)].r;
-            mir_whore[(nr*i)+j].g=img->img[(row*(j))+(column-i-1)].g;
-            mir_whore[(nr*i)+j].b=img->img[(row*(j))+(column-i-1)].b;
+            mir_whore[(nc*i)+j].r=img->img[(column*(j))+(column-i-1)].r;
+            mir_whore[(nc*i)+j].g=img->img[(column*(j))+(column-i-1)].g;
+            mir_whore[(nc*i)+j].b=img->img[(column*(j))+(column-i-1)].b;
         }
     }
     free(img->img);
@@ -36,9 +36,9 @@ void rotate_clockwise(image_t *img) {
     {
         for(int j=0;j<nc;j++)
         {
-            mir_whore[(nr*i)+j].r=img->img[(row*(row-j-1))+(i)].r;
-            mir_whore[(nr*i)+j].g=img->img[(row*(row-j-1))+(i)].g;
-            mir_whore[(nr*i)+j].b=img->img[(row*(row-j-1))+(i)].b;
+            mir_whore[(nc*i)+j].r=img->img[(column*(row-j-1))+(i)].r;
+            mir_whore[(nc*i)+j].g=img->img[(column*(row-j-1))+(i)].g;
+            mir_whore[(nc*i)+j].b=img->img[(column*(row-j-1))+(i)].b;
         }
     }
     free(img->img);
@@ -55,9 +55,9 @@ void mirror_horizontal(image_t *img) {
     {
         for(int j=0;j<column;j++)
         {
-            mir_whore[((row*i)+(j))].r=img->img[(row*i)+(column-1-j)].r;
-            mir_whore[(row*i)+(j)].g=img->img[(row*i)+(column-1-j)].g;
-            mir_whore[(row*i)+(j)].b=img->img[(row*i)+(column-1-j)].b;
+            mir_whore[(column*i)+(j)].r=img->img[(column*i)+(column-1-j)].r;
+            mir_whore[(column*i)+(j)].g=img->img[(column*i)+(column-1-j)].g;
+            mir_whore[(column*i)+(j)].b=img->img[(column*i)+(column-1-j)].b;
         }
     }
     free(img->img);
@@ -73,9 +73,9 @@ void mirror_vertical(image_t *img) {
     {
         for(int j=0;j<column;j++)
         {
-            mir_whorer[(row*(row-i-1))+(j)].r=img->img[(row*i)+j].r;
-            mir_whorer[(row*(row-i-1))+(j)].g=img->img[(row*i)+j].g;
-            mir_whorer[(row*(row-i-1))+(j)].b=img->img[(row*i)+j].b;
+            mir_whorer[(column*(row-i-1))+(j)].r=img->img[(column*i)+j].r;
+            mir_whorer[(column*(row-i-1))+(j)].g=img->img[(column*i)+j].g;
+            mir_whorer[(column*(row-i-1))+(j)].b=img->img[(column*i)+j].b;
         }
     }
     free(img->img);
@@ -84,8 +84,71 @@ void mirror_vertical(image_t *img) {
 }
 
 void resize(image_t *img, int new_width, int new_height) {
-    NOT_IMPLEMENTED;
-    UNUSED(img);
-    UNUSED(new_width);
-    UNUSED(new_height);
-}
+    /*
+  int ow = img->w;
+  int oh = img->h;
+  pixel_t *resizer = malloc(new_width*new_height*sizeof(pixel_t));
+  //solving for each individual case
+  //new_width<ow&&new_height<oh
+  if(new_width<=ow && new_height<=oh)
+  {
+  for(int i =0;i<new_height;i++)
+  {
+    for(int j=0;j<new_width;j++)
+    {
+            resizer[(new_height*i)+j].r= img->img[(new_height*i)+j].r;
+            resizer[(new_height*i)+j].g= img->img[(new_height*i)+j].g;
+            resizer[(new_height*i)+j].b= img->img[(new_height*i)+j].b;
+        }
+  }
+  }
+  //new_width>=ow &&newheight<=oh
+  if(new_width>=ow && new_height<=oh)
+  {
+  for(int i =0;i<new_height;i++)
+  {
+    for(int j=0;j<new_width;j++)
+    {       
+            if(j<ow)
+            {
+            resizer[(new_height*i)+j].r= img->img[(new_height*i)+j].r;
+            resizer[(new_height*i)+j].g= img->img[(new_height*i)+j].g;
+            resizer[(new_height*i)+j].b= img->img[(new_height*i)+j].b;
+            }
+            if(j>=ow)
+            {
+                resizer[(new_height*i)+j].r= 0;
+                resizer[(new_height*i)+j].g= 0;
+                resizer[(new_height*i)+j].b= 0;
+            }
+        }
+  }
+  }
+  //new_height>=oh && new_width<=ow
+  if(new_height>=oh && new_width<=ow)
+  {
+    for(int i =0;i<new_height;i++)
+  {
+    for(int j=0;j<new_width;j++)
+    {       
+            if(i<oh)
+            {
+            resizer[(oh*i)+j].r= img->img[(oh*i)+j].r;
+            resizer[(oh*i)+j].g= img->img[(oh*i)+j].g;
+            resizer[(oh*i)+j].b= img->img[(oh*i)+j].b;
+            }
+            if(i>=ow)
+            {
+                resizer[(new_height*i)+j].r= 0;
+                resizer[(new_height*i)+j].g= 0;
+                resizer[(new_height*i)+j].b= 0;
+            }
+        }
+  }
+  }
+  img->h=new_height;
+  img->w=new_width;
+  free(img->img);
+  img->img = resizer;
+  */
+  }
