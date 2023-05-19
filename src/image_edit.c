@@ -39,9 +39,9 @@ void mirror_horizontal(image_t *img) {
     {
         for(int j=0;j<column;j++)
         {
-            mir_whore[((row*i)+(column-1-j))].r=img->img[(row*i)+j].r;
-            mir_whore[(row*i)+(column-1-j)].g=img->img[(row*i)+j].g;
-            mir_whore[(row*i)+(column-1-j)].b=img->img[(row*i)+j].b;
+            mir_whore[((row*i)+(j))].r=img->img[(row*i)+(column-1-j)].r;
+            mir_whore[(row*i)+(j)].g=img->img[(row*i)+(column-1-j)].g;
+            mir_whore[(row*i)+(j)].b=img->img[(row*i)+(column-1-j)].b;
         }
     }
     free(img->img);
