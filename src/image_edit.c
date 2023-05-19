@@ -84,11 +84,29 @@ void mirror_vertical(image_t *img) {
 }
 
 void resize(image_t *img, int new_width, int new_height) {
-    /*
+    
   int ow = img->w;
   int oh = img->h;
   pixel_t *resizer = malloc(new_width*new_height*sizeof(pixel_t));
-  //solving for each individual case
+  for(int i=0;i<new_height;i++)
+  {
+    for(int j=0;j<new_width;j++)
+    {
+        if(i<oh && j<ow)
+        {
+            resizer[(new_width*i)+j].r= img->img[(ow*i)+j].r;
+            resizer[(new_width*i)+j].g= img->img[(ow*i)+j].g;
+            resizer[(new_width*i)+j].b= img->img[(ow*i)+j].b;
+        }
+        if(i>=oh || j>=ow)
+        {
+            resizer[(new_width*i)+j].r=0;
+            resizer[(new_width*i)+j].g=0;
+            resizer[(new_width*i)+j].b=0;
+        }
+    }
+  }
+  /*  //solving for each individual case
   //new_width<ow&&new_height<oh
   if(new_width<=ow && new_height<=oh)
   {
@@ -96,9 +114,9 @@ void resize(image_t *img, int new_width, int new_height) {
   {
     for(int j=0;j<new_width;j++)
     {
-            resizer[(new_height*i)+j].r= img->img[(new_height*i)+j].r;
-            resizer[(new_height*i)+j].g= img->img[(new_height*i)+j].g;
-            resizer[(new_height*i)+j].b= img->img[(new_height*i)+j].b;
+            resizer[(new_width*i)+j].r= img->img[(new_width*i)+j].r;
+            resizer[(new_width*i)+j].g= img->img[(new_width*i)+j].g;
+            resizer[(new_width*i)+j].b= img->img[(new_width*i)+j].b;
         }
   }
   }
@@ -146,9 +164,11 @@ void resize(image_t *img, int new_width, int new_height) {
         }
   }
   }
+  */
+
   img->h=new_height;
   img->w=new_width;
   free(img->img);
   img->img = resizer;
-  */
+  
   }
