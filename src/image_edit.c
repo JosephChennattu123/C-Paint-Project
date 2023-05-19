@@ -27,8 +27,24 @@ void rotate_counterclockwise(image_t *img) {
    }
 
 void rotate_clockwise(image_t *img) {
-    NOT_IMPLEMENTED;
-    UNUSED(img);
+    int column = img->w;
+    int row = img->h;
+    int nc = row;
+    int nr = column;
+    pixel_t *mir_whore = malloc(row*column*sizeof(pixel_t));
+    for(int i = 0;i<nr;i++)
+    {
+        for(int j=0;j<nc;j++)
+        {
+            mir_whore[(nr*i)+j].r=img->img[(row*(row-j-1))+(i)].r;
+            mir_whore[(nr*i)+j].g=img->img[(row*(row-j-1))+(i)].g;
+            mir_whore[(nr*i)+j].b=img->img[(row*(row-j-1))+(i)].b;
+        }
+    }
+    free(img->img);
+    img->h = nc;
+    img->w = nr;
+    img->img = mir_whore;
 }
 
 void mirror_horizontal(image_t *img) {
