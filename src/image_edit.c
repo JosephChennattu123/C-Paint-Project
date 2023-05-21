@@ -6,50 +6,45 @@
 #include "util.h"
 
 void rotate_counterclockwise(image_t *img) {
-    int column = img->w;
-    int row = img->h;
-    int nc = row;
-    int nr = column;
-    pixel_t *mir_whore = malloc(row*column*sizeof(pixel_t));
-    for(int i = 0;i<nr;i++)
+  int ow= img->w;
+  int oh = img->h;
+  pixel_t *cc = malloc(oh*ow*sizeof(pixel_t));
+  for(int i =0;i<ow;i++)
+  {
+    for(int j=0;j<oh;j++)
     {
-        for(int j=0;j<nc;j++)
-        {
-            mir_whore[(nc*i)+j].r=img->img[(column*(j))+(column-i-1)].r;
-            mir_whore[(nc*i)+j].g=img->img[(column*(j))+(column-i-1)].g;
-            mir_whore[(nc*i)+j].b=img->img[(column*(j))+(column-i-1)].b;
-        }
+        cc[(oh*j)+i].r = img->img[ow*(i)+(ow-j-1)].r;
+        cc[(oh*j)+i].g = img->img[ow*(i)+(ow-j-1)].g;
+        cc[(oh*j)+i].b = img->img[ow*(i)+(ow-j-1)].b;
+
     }
-    free(img->img);
-    img->h = nc;
-    img->w = nr;
-    img->img = mir_whore;
+  }
+  free(img->img);
+  img->img=cc;
    }
 
 void rotate_clockwise(image_t *img) {
-    int column = img->w;
-    int row = img->h;
-    int nc = row;
-    int nr = column;
-    pixel_t *mir_whore = malloc(row*column*sizeof(pixel_t));
-    for(int i = 0;i<nr;i++)
+   int ow= img->w;
+  int oh = img->h;
+  pixel_t *cc = malloc(oh*ow*sizeof(pixel_t));
+  for(int i =0;i<ow;i++)
+  {
+    for(int j=0;j<oh;j++)
     {
-        for(int j=0;j<nc;j++)
-        {
-            mir_whore[(nc*i)+j].r=img->img[(column*(row-j-1))+(i)].r;
-            mir_whore[(nc*i)+j].g=img->img[(column*(row-j-1))+(i)].g;
-            mir_whore[(nc*i)+j].b=img->img[(column*(row-j-1))+(i)].b;
-        }
+        cc[(oh*i)+j].r = img->img[ow*(oh-j-1)+i].r;
+        cc[(oh*i)+j].g = img->img[ow*(oh-j-1)+i].g;
+        cc[(oh*i)+j].b = img->img[ow*(oh-j-1)+i].b;
+
     }
-    free(img->img);
-    img->h = nc;
-    img->w = nr;
-    img->img = mir_whore;
+  }
+  free(img->img);
+  img->img=cc;
 }
 
 void mirror_horizontal(image_t *img) {
     int column = img->w;
     int row = img->h;
+    
     pixel_t *mir_whore = malloc(row*column*sizeof(pixel_t));
     for(int i = 0;i<row;i++)
     {
