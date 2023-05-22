@@ -6,22 +6,20 @@
 #include "util.h"
 
 void rotate_counterclockwise(image_t *img) {
-  int ow= img->w;
-  int oh = img->h;
-  pixel_t *cc = malloc(oh*ow*sizeof(pixel_t));
-  for(int i =0;i<ow;i++)
+  int w= img->w;
+  int h = img->h;
+  pixel_t *cc = malloc(h*w*sizeof(pixel_t));
+  for(int i =0;i<h;i++)
   {
-    for(int j=0;j<oh;j++)
+    for(int j=0;j<w;j++)
     {
-        cc[(oh*j)+i].r = img->img[ow*(i)+(ow-j-1)].r;
-        cc[(oh*j)+i].g = img->img[ow*(i)+(ow-j-1)].g;
-        cc[(oh*j)+i].b = img->img[ow*(i)+(ow-j-1)].b;
-
+        cc[(h*(w-j-1))+i] = img->img[(w*i)+j];
+        
     }
   }
   free(img->img);
-  img->h = ow;
-  img->w = oh;
+  img->h = w;
+  img->w = h;
   img->img=cc;
    }
 

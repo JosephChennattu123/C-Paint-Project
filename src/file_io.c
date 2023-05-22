@@ -8,7 +8,7 @@
 #include "util.h"
 
 int image_read(image_t *img, FILE *fin) {
-    int width,height;
+    int width,height, net_pix=0;
     int i = fscanf(fin,"P3 %d %d 255",&width,&height);
     if(i!=2)
     {
@@ -37,7 +37,19 @@ int image_read(image_t *img, FILE *fin) {
         pixelarr[q].r= red;
         pixelarr[q].g= green;
         pixelarr[q].b= blue;
+        net_pix++;
     }
+   if(net_pix != (width*height))
+   {
+    free(img->img);
+    return -1;
+    }
+    int extraPixelCheck;
+    if (fscanf(fin, "%d", &extraPixelCheck) == 1) {
+        free(pixelarr);
+        return -1;
+    }
+
     img->w= width;
     img->h=height;
     img->img = pixelarr;
