@@ -20,6 +20,8 @@ void rotate_counterclockwise(image_t *img) {
     }
   }
   free(img->img);
+  img->h = ow;
+  img->w = oh;
   img->img=cc;
    }
 
@@ -27,17 +29,16 @@ void rotate_clockwise(image_t *img) {
    int ow= img->w;
   int oh = img->h;
   pixel_t *cc = malloc(oh*ow*sizeof(pixel_t));
-  for(int i =0;i<ow;i++)
+  for(int  i=0;i<oh;i++)
   {
-    for(int j=0;j<oh;j++)
+    for(int j=0;j<ow;j++)
     {
-        cc[(oh*i)+j].r = img->img[ow*(oh-j-1)+i].r;
-        cc[(oh*i)+j].g = img->img[ow*(oh-j-1)+i].g;
-        cc[(oh*i)+j].b = img->img[ow*(oh-j-1)+i].b;
-
+        cc[(oh*j)+(oh-i-1)]=img->img[ow*i+j];
     }
   }
   free(img->img);
+  img->h = ow;
+  img->w = oh;
   img->img=cc;
 }
 
