@@ -28,6 +28,7 @@ void flood(image_t *img, int x, int y, pixel_t *target_color) {
     int rot = img->img[(wi*y)+x].r;
     int grun = img->img[(wi*y)+x].g;
     int blau = img->img[(wi*y)+x].b;
+    if((rot==target_color->r)&&(grun==target_color->g)&&(blau==target_color->b)) return;
     jill(img,x,y,target_color,wi,hi,rot,grun,blau);   
 
 }
